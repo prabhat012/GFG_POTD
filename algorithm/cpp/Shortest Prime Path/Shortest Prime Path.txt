@@ -1,0 +1,55 @@
+class Solution{   
+  public:
+   vector< int >  SieveOfEratosthenes(int n){
+  vector< int > prime(n+1 ,1);
+  for (int p=2; p*p<=n; p++){
+    if (prime[p] == 1){
+      for (int i=p*2; i<=n; i += p)
+         prime[i] =  0;
+    }
+  }
+    return prime;
+}
+    int shortestPath(int n1,int n2)
+    {   
+        // Complete this function using prime vector
+        unordered_set< int > st;
+      vector<int> all = SieveOfEratosthenes(10000);
+      for(int i = 2; i<=  10000; i++){
+           if(all[i] == 1 && i >=  1000) st.insert(i);
+      }
+      
+      queue<int> q;
+      q.push(n1);
+      int ans = 0;
+      int y = 0;
+      vector<int > vis(10000 , -1);
+      while(q.size()){
+          int s = q.size();
+          while(s--){
+              int curr = q.front();
+              q.pop();
+              if(curr ==  n2){ 
+              return ans;
+             }
+              string f =  to_string(curr);
+              string mi = f;
+              for(int i = 0; i < f.size(); i++){
+                  f  = mi;
+                  for(char a = '0'; a <= '9'; a++){
+                       if(i == 0 && a == '0') continue;
+                      f[i] = a;
+                      int g =  stoi(f);
+                      if(vis[g] == -1 && st.find(g) != st.end()){
+                      q.push(g);
+                      vis[g] = 1;
+                       }
+                  }
+              }
+          }
+          ans++;
+      }
+    return 0;
+      
+    }
+};
