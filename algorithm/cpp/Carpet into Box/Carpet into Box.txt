@@ -1,0 +1,11 @@
+class Solution{
+    public:
+    int solve(int a, int b, int c, int d){
+        if(a <= c and b <= d) return 0;
+        if(a > c) return 1 + solve(floor(a/2), b, c, d);
+        if(b > d) return 1 +  solve(a, floor(b/2), c, d);
+    }
+    int carpetBox(int a, int b, int c, int d){
+        return min(solve(a,b,c,d), solve(b,a,c,d));
+    }
+};
