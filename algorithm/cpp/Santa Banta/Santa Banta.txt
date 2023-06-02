@@ -2,6 +2,7 @@ class Solution{
 public:
       vector<int> primes,is_prime;
     void precompute(){
+    // compute all the prime numbers
         int N = 2000000;
         is_prime.resize(N);
         primes.clear();
